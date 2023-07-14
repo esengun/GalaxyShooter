@@ -461,3 +461,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPositionYOffset: 0.5
+  _fireRate: 0.15

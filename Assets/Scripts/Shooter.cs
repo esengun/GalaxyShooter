@@ -7,10 +7,15 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] private float _bulletPositionYOffset = 0.5f;
 
+    [SerializeField] private float _fireRate = 0.5f;
+    private float nextFire = 0.0f;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
         {
+            nextFire = Time.time + _fireRate;
+
             GameObject bullet = BulletPool.SharedInstance.GetPooledObject();
             if (bullet != null)
             {

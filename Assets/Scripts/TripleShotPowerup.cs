@@ -10,7 +10,7 @@ public class TripleShotPowerup : Powerup
         if (shooter != null)
         {
             shooter.SetPowerupTripleShot(true, _powerupDuration);
-            Destroy(gameObject);
+            DisableEnemy();
         }
     }
 }

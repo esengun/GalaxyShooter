@@ -26,7 +26,7 @@ public class ObjectPool<T> : MonoBehaviour
         }
     }
 
-    public GameObject GetPooledObject()
+    public virtual GameObject GetPooledObject()
     {
         for (int i = 0; i < amountToPool; i++)
         {

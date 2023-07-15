@@ -18,6 +18,9 @@ public class PlayArea : MonoBehaviour
 
     [SerializeField] public float enemyDestroyPositionY = -5f;
     [SerializeField] public float enemySpawnPositionY = 5f;
+    
+    [SerializeField] public float powerUpSpawnPositionY = 5f;
+    [SerializeField] public float powerUpDestroyPositionY = 5f;
 
     void Awake()
     {

@@ -11,7 +11,7 @@ public class EnemyPool : ObjectPool<Enemy>
     public override void Start()
     {
         Player.PlayerDead += OnPlayerDead;
-        pooledObjects = new List<GameObject>();
+        SharedInstance.pooledObjects = new List<GameObject>();
         GameObject tmp;
         for (int i = 0; i < amountToPool; i++)
         {
@@ -19,7 +19,7 @@ public class EnemyPool : ObjectPool<Enemy>
             var randomXpos = Random.Range(PlayArea.SharedInstance.horizontalMinPosition, PlayArea.SharedInstance.horizontalMaxPosition);
             tmp.transform.position = new Vector3(randomXpos, PlayArea.SharedInstance.enemySpawnPositionY, 0f);
             tmp.SetActive(false);
-            pooledObjects.Add(tmp);
+            SharedInstance.pooledObjects.Add(tmp);
         }
         StartCoroutine(SpawnEnemy());
     }

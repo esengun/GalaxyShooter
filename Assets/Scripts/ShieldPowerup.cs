@@ -12,7 +12,7 @@ public class ShieldPowerup : Powerup
         if (player != null)
         {
             player.SetPowerupShield(_shieldSprite, _powerupDuration);
-            Destroy(gameObject);
+            DisableEnemy();
         }
     }
 }

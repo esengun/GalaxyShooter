@@ -8,7 +8,6 @@ public class Shooter : MonoBehaviour
     public bool _canTripleShot { get; private set; }
 
     [SerializeField] private float _fireRate = 0.5f;
-    [SerializeField] private float _powerUpDuration = 4f;
     private float nextFire = 0.0f;
 
     void Update()
@@ -21,7 +20,6 @@ public class Shooter : MonoBehaviour
             if (_canTripleShot)
             {
                 bullet = TripleBulletPool.SharedInstance.GetPooledObject();
-                
             }
             else
             {
@@ -35,15 +33,15 @@ public class Shooter : MonoBehaviour
         }        
     }
 
-    public void SetPowerupTripleShot(bool isOn)
+    public void SetPowerupTripleShot(bool isOn, float duration)
     {
         _canTripleShot = isOn;
-        StartCoroutine(TripleShotPowerDownRoutine());
+        StartCoroutine(TripleShotPowerDownRoutine(duration));
     }
 
-    IEnumerator TripleShotPowerDownRoutine()
+    IEnumerator TripleShotPowerDownRoutine(float duration)
     {
-        yield return new WaitForSeconds(_powerUpDuration);
-        SetPowerupTripleShot(false);
+        yield return new WaitForSeconds(duration);
+        _canTripleShot = false;
     }
 }

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 
     private void HandleMovement()
     {
+        Debug.Log(_speed);
         transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * _speed, 0, 0);
         transform.Translate(0, Input.GetAxis("Vertical") * Time.deltaTime * _speed, 0);
 
@@ -48,5 +49,17 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, _verticalMaxPosition, 0);
         }
+    }
+
+    public void SetPowerupSpeedBoost(float speedMultiplier, float duration)
+    {
+        _speed *= speedMultiplier;
+        StartCoroutine(SpeedBostPowerupDownRoutine(speedMultiplier, duration));        
+    }
+
+    IEnumerator SpeedBostPowerupDownRoutine(float speedMultiplier, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        _speed /= speedMultiplier;
     }
 }

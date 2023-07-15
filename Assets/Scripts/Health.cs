@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _healthUi;
+    [SerializeField] private UIManager _uiManager;
     public int _numberOfLives {get; private set;}
 
     private void Start()
     {
         _numberOfLives = 3;
-        _healthUi.text = $"Health: {_numberOfLives}";
+        _uiManager.UpdateLiveUI(_numberOfLives);
     }
 
     public void IncreaseHealth()
     {
         _numberOfLives++;
-        _healthUi.text = $"Health: {_numberOfLives}";
+        _uiManager.UpdateLiveUI(_numberOfLives);
     }
 
     public void DecreaseHealth()
     {
         _numberOfLives--;
-        _healthUi.text = $"Health: {_numberOfLives}";
+        _uiManager.UpdateLiveUI(_numberOfLives);
     }
 }

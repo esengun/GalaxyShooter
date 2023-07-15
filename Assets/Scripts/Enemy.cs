@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObject _explosion;
     [SerializeField] private float _speed = 5f;
+
+    public Action EnemyKilled;
 
     private void Update()
     {
@@ -19,7 +19,13 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<Bullet>() != null || other.GetComponent<TripleBullet>() != null || other.GetComponent<Player>() != null)
+        if (other.GetComponent<Bullet>() != null || other.GetComponent<TripleBullet>() != null)
+        {
+            EnemyKilled?.Invoke();
+            Instantiate(_explosion, transform.position, Quaternion.identity);
+            DisableEnemy();
+        }
+        else if (other.GetComponent<Player>() != null)
         {
             Instantiate(_explosion, transform.position, Quaternion.identity);
             DisableEnemy();
@@ -28,7 +34,7 @@ public class Enemy : MonoBehaviour
 
     public void DisableEnemy()
     {
-        var randomXpos = Random.Range(PlayArea.SharedInstance.horizontalMinPosition, PlayArea.SharedInstance.horizontalMaxPosition);
+        var randomXpos = UnityEngine.Random.Range(PlayArea.SharedInstance.horizontalMinPosition, PlayArea.SharedInstance.horizontalMaxPosition);
         transform.position = new Vector3(randomXpos, PlayArea.SharedInstance.enemySpawnPositionY, 0f);
         gameObject.SetActive(false);
     }

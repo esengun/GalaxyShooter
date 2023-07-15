@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class EnemyPool : ObjectPool<Enemy>
 {
     [SerializeField] private float _enemySpawnInterval = 3f;
+    [SerializeField] private Player _player;
 
     private bool _isPlayerDead;
 
@@ -16,12 +18,18 @@ public class EnemyPool : ObjectPool<Enemy>
         for (int i = 0; i < amountToPool; i++)
         {
             tmp = Instantiate(objectToPool);
+            tmp.GetComponent<Enemy>().EnemyKilled += OnEnemyKilled;
             var randomXpos = Random.Range(PlayArea.SharedInstance.horizontalMinPosition, PlayArea.SharedInstance.horizontalMaxPosition);
             tmp.transform.position = new Vector3(randomXpos, PlayArea.SharedInstance.enemySpawnPositionY, 0f);
             tmp.SetActive(false);
             SharedInstance.pooledObjects.Add(tmp);
         }
         StartCoroutine(SpawnEnemy());
+    }
+
+    private void OnEnemyKilled()
+    {
+        Player.EnemyKilledAddPoints();
     }
 
     private void OnPlayerDead()

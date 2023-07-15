@@ -7,7 +7,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject _explosion;
     [SerializeField] private float _speed;
+
     private Health _health;
+    private SpriteRenderer _spriteRenderer;
+    private Sprite _defaultSprite;
+    private bool _hasShield;
 
     public static Action PlayerDead;
 
@@ -19,6 +23,10 @@ public class Player : MonoBehaviour
         {
             _health = gameObject.AddComponent<Health>();
         }
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _defaultSprite = _spriteRenderer.sprite;
+
         transform.position = Vector3.zero;
     }
 
@@ -65,17 +73,41 @@ public class Player : MonoBehaviour
         _speed /= speedMultiplier;
     }
 
+    public void SetPowerupShield(Sprite shieldSprite, float duration)
+    {
+        _hasShield = true;
+        _spriteRenderer.sprite = shieldSprite;
+        StartCoroutine(ShieldPowerupDownRoutine(duration));
+    }
+
+    IEnumerator ShieldPowerupDownRoutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        DisableShield();
+    }
+
+    private void DisableShield()
+    {
+        _spriteRenderer.sprite = _defaultSprite;
+        _hasShield = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.GetComponent<Enemy>() != null)
         {
+            if (_hasShield)
+            {
+                DisableShield();
+                return;
+            }
             TakeDamage();            
         }
     }
 
     private void TakeDamage()
     {
-        _health._numberOfLives--;
+        _health.DecreaseHealth();
         if (_health._numberOfLives < 1)
         {
             Instantiate(_explosion, transform.position, Quaternion.identity);

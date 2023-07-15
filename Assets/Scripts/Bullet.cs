@@ -5,14 +5,21 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _speed = 10f;
-    [SerializeField] private float _posYToDestroy;
 
     private void Update()
     {
-        if (transform.position.y >= _posYToDestroy)
+        if (transform.position.y >= PlayArea.SharedInstance.bulletDestroyPositionY)
         {
             gameObject.SetActive(false);
         }
         transform.Translate(Vector3.up * Time.deltaTime * _speed);   
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<Enemy>() != null)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -153,7 +153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &221991422
 MonoBehaviour:
@@ -215,7 +215,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &486529217
 GameObject:
@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 486529220}
   - component: {fileID: 486529219}
   - component: {fileID: 486529218}
+  - component: {fileID: 486529221}
   m_Layer: 6
   m_Name: Galaxy
   m_TagString: Untagged
@@ -300,6 +301,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &486529221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486529217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c428237fc00573b4fbbf24454c0dc122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  verticalMaxPosition: 4
+  verticalMinPosition: -4
+  horizontalMaxPosition: 8
+  horizontalMinPosition: -8
+  bulletDestroyPositionY: 5
+  enemyDestroyPositionY: -5
+  enemySpawnPositionY: 5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,9 +424,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Triple_shot_powerup
       objectReference: {fileID: 0}
+    - target: {fileID: 1001981974085371923, guid: 35c746ba63b81da48a4a76d2dd2eb7d5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6759385464044291283, guid: 35c746ba63b81da48a4a76d2dd2eb7d5, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6759385464044291283, guid: 35c746ba63b81da48a4a76d2dd2eb7d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -465,9 +489,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Speed_powerup
       objectReference: {fileID: 0}
+    - target: {fileID: 4200152916852591294, guid: 7d65223cfb182684eb89a440e2daadde, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5479239192311966495, guid: 7d65223cfb182684eb89a440e2daadde, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5479239192311966495, guid: 7d65223cfb182684eb89a440e2daadde, type: 3}
       propertyPath: m_LocalPosition.x
@@ -615,10 +643,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _verticalMaxPosition: 0
-  _verticalMinPosition: -4
-  _horizontalMaxPosition: 8
-  _horizontalMinPosition: -8
 --- !u!114 &1117984638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,3 +728,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &2066494746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2066494749}
+  - component: {fileID: 2066494747}
+  m_Layer: 0
+  m_Name: EnemyPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2066494747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066494746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ad8c3f773b29749b8d119eabbd1068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 1391818350211146899, guid: fc22029f7b0622f4d9feb0cbb440a164, type: 3}
+  amountToPool: 50
+  _enemySpawnInterval: 2
+--- !u!4 &2066494749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066494746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -1,21 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     [SerializeField] private float _speed;
+    private Health _health;
 
-    [SerializeField] private float _verticalMaxPosition;
-    [SerializeField] private float _verticalMinPosition;
-
-    [SerializeField] private float _horizontalMaxPosition;
-    [SerializeField] private float _horizontalMinPosition;
+    public static Action PlayerDead;
 
     // Start is called before the first frame update
     void Start()
     {
+        _health = GetComponent<Health>();
+        if( _health == null)
+        {
+            _health = gameObject.AddComponent<Health>();
+        }
         transform.position = Vector3.zero;
     }
 
@@ -27,27 +29,26 @@ public class Player : MonoBehaviour
 
     private void HandleMovement()
     {
-        Debug.Log(_speed);
         transform.Translate(Input.GetAxis("Horizontal") * Time.deltaTime * _speed, 0, 0);
         transform.Translate(0, Input.GetAxis("Vertical") * Time.deltaTime * _speed, 0);
 
 
-        if (transform.position.x <= _horizontalMinPosition)
+        if (transform.position.x <= PlayArea.SharedInstance.horizontalMinPosition)
         {
-            transform.position = new Vector3(_horizontalMaxPosition, transform.position.y, 0);
+            transform.position = new Vector3(PlayArea.SharedInstance.horizontalMaxPosition, transform.position.y, 0);
         }
-        else if (transform.position.x >= _horizontalMaxPosition)
+        else if (transform.position.x >= PlayArea.SharedInstance.horizontalMaxPosition)
         {
-            transform.position = new Vector3(_horizontalMinPosition, transform.position.y, 0);
+            transform.position = new Vector3(PlayArea.SharedInstance.horizontalMinPosition, transform.position.y, 0);
         }
 
-        if (transform.position.y <= _verticalMinPosition)
+        if (transform.position.y <= PlayArea.SharedInstance.verticalMinPosition)
         {
-            transform.position = new Vector3(transform.position.x, _verticalMinPosition, 0);
+            transform.position = new Vector3(transform.position.x, PlayArea.SharedInstance.verticalMinPosition, 0);
         }
-        else if (transform.position.y >= _verticalMaxPosition)
+        else if (transform.position.y >= PlayArea.SharedInstance.verticalMaxPosition + PlayArea.SharedInstance.verticalMinPosition)
         {
-            transform.position = new Vector3(transform.position.x, _verticalMaxPosition, 0);
+            transform.position = new Vector3(transform.position.x, PlayArea.SharedInstance.verticalMaxPosition + PlayArea.SharedInstance.verticalMinPosition, 0);
         }
     }
 
@@ -61,5 +62,23 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         _speed /= speedMultiplier;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.GetComponent<Enemy>() != null)
+        {
+            TakeDamage();            
+        }
+    }
+
+    private void TakeDamage()
+    {
+        _health._numberOfLives--;
+        if (_health._numberOfLives < 1)
+        {
+            PlayerDead?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }

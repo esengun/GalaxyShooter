@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private GameObject _explosion;
     [SerializeField] private float _speed;
     private Health _health;
 
@@ -77,6 +78,7 @@ public class Player : MonoBehaviour
         _health._numberOfLives--;
         if (_health._numberOfLives < 1)
         {
+            Instantiate(_explosion, transform.position, Quaternion.identity);
             PlayerDead?.Invoke();
             Destroy(gameObject);
         }

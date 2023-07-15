@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 30
-  _posYToDestroy: 5
 --- !u!50 &6947235758366290875
 Rigidbody2D:
   serializedVersion: 4
@@ -110,9 +109,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1}
+  m_Offset: {x: 0, y: 0.120200515}
   serializedVersion: 2
-  m_Radius: 0.5018332
+  m_Radius: 0.5220337
 --- !u!1 &4678362329562436203
 GameObject:
   m_ObjectHideFlags: 0

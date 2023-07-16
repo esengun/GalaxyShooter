@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5932818161171890366}
   - component: {fileID: 6710874295851257434}
   - component: {fileID: 4602168372308131510}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 30
-  _posYToDestroy: 5
 --- !u!61 &6710874295851257434
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8942618122294388605}
   - component: {fileID: 4416842480135502689}
   - component: {fileID: 3905487708569786694}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,6 +202,10 @@ PrefabInstance:
     - target: {fileID: 7602363237473255078, guid: 3605710cf3d2ecb489208a634682e736, type: 3}
       propertyPath: m_Name
       value: StyleJetEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602363237473255078, guid: 3605710cf3d2ecb489208a634682e736, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7602363237473255079, guid: 3605710cf3d2ecb489208a634682e736, type: 3}
       propertyPath: m_SortingOrder

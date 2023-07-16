@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosion_Player Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8038344524183138613, guid: 0277167a12290af47801444830a2be97, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8038344524183138614, guid: 0277167a12290af47801444830a2be97, type: 3}
       propertyPath: m_RootOrder
       value: 0

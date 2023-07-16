@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9150616822614904341}
   - component: {fileID: 5515261741743517177}
   - component: {fileID: 5391680030185069724}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triple_shot_powerup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

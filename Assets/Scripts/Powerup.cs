@@ -6,7 +6,7 @@ public abstract class Powerup : MonoBehaviour
 {
     [SerializeField] private float _speed = 3f;
     [SerializeField] protected float _powerupDuration = 4f;
-
+    [SerializeField] private AudioClip _powerupSound;
 
     private void Update()
     {
@@ -20,7 +20,10 @@ public abstract class Powerup : MonoBehaviour
         }
     }
 
-    protected abstract void OnTriggerEnter2D(Collider2D other);
+    protected virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        AudioSource.PlayClipAtPoint(_powerupSound, Camera.main.transform.position);
+    }
 
     protected void DisableEnemy()
     {

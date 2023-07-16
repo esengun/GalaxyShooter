@@ -12,6 +12,7 @@ public class SpeedBoostPowerup : Powerup
         var player = other.GetComponent<Player>();
         if (player != null)
         {
+            base.OnTriggerEnter2D(other);
             player.SetPowerupSpeedBoost(_boostMultiplier, _powerupDuration);
             DisableEnemy();
         }

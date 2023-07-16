@@ -11,6 +11,7 @@ public class ShieldPowerup : Powerup
         var player = other.GetComponent<Player>();
         if (player != null)
         {
+            base.OnTriggerEnter2D(other);
             player.SetPowerupShield(_shieldSprite, _powerupDuration);
             DisableEnemy();
         }

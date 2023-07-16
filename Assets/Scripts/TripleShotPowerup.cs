@@ -9,6 +9,7 @@ public class TripleShotPowerup : Powerup
         var shooter = other.GetComponent<Shooter>();
         if (shooter != null)
         {
+            base.OnTriggerEnter2D(other);
             shooter.SetPowerupTripleShot(true, _powerupDuration);
             DisableEnemy();
         }

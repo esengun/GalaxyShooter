@@ -135,4 +135,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _powerupDuration: 4
+  _powerupSound: {fileID: 8300000, guid: 5ee718f06d7de8b458ceab672beebcdb, type: 3}
   _shieldSprite: {fileID: 21300000, guid: 36da0b7bdceee7a48851d5dd2aefe98f, type: 3}

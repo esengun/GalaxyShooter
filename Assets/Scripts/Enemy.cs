@@ -5,6 +5,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObject _explosion;
     [SerializeField] private float _speed = 5f;
+    [SerializeField] private AudioClip _explosionSound;
 
     public Action EnemyKilled;
 
@@ -19,18 +20,18 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Instantiate(_explosion, transform.position, Quaternion.identity);
+        AudioSource.PlayClipAtPoint(_explosionSound, Camera.main.transform.position);
         if (other.GetComponent<Bullet>() != null || other.GetComponent<TripleBullet>() != null)
         {
             GameManager.SharedInstance.OnEnemyKilled();
             EnemyKilled?.Invoke();
-            Instantiate(_explosion, transform.position, Quaternion.identity);
             DisableEnemy();
         }
         else if (other.GetComponent<Player>() != null)
         {
-            Instantiate(_explosion, transform.position, Quaternion.identity);
             DisableEnemy();
-        }
+        }        
     }
 
     public void DisableEnemy()

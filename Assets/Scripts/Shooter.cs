@@ -10,6 +10,9 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float _fireRate = 0.5f;
     private float nextFire = 0.0f;
 
+    [SerializeField] private AudioSource _audioSource;
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextFire)
@@ -29,6 +32,7 @@ public class Shooter : MonoBehaviour
             {
                 bullet.transform.position = transform.position;
                 bullet.SetActive(true);
+                _audioSource.Play();
             }
         }        
     }

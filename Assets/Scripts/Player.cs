@@ -6,6 +6,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject _explosion;
+    [SerializeField] private GameObject _failureFXleft;
+    [SerializeField] private GameObject _failureFXright;
     [SerializeField] private float _speed;
 
     
@@ -16,6 +18,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _failureFXleft.SetActive(false);
+        _failureFXright.SetActive(false);
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultSprite = _spriteRenderer.sprite;
 
@@ -100,11 +104,21 @@ public class Player : MonoBehaviour
     private void TakeDamage()
     {
         GameManager.SharedInstance._health.DecreaseHealth();
-        if (GameManager.SharedInstance._health._numberOfLives < 1)
+        var currentHealth = GameManager.SharedInstance._health._numberOfLives;
+        if (currentHealth < 1)
         {
             Instantiate(_explosion, transform.position, Quaternion.identity);
             GameManager.SharedInstance.OnPlayerDead();
             Destroy(gameObject);
+        }
+        else if(currentHealth < 2)
+        {
+            _failureFXright.SetActive(true);
+            _failureFXleft.SetActive(true);
+        }
+        else if(currentHealth < 3) 
+        {
+            _failureFXleft.SetActive(true);
         }
     }
 }

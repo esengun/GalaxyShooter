@@ -9,10 +9,6 @@ public class ObjectPool<T> : MonoBehaviour
     public GameObject objectToPool;
     public int amountToPool;
 
-    void Awake()
-    {
-        SharedInstance = this;
-    }
 
     public virtual void Start()
     {
@@ -24,6 +20,16 @@ public class ObjectPool<T> : MonoBehaviour
             tmp.SetActive(false);
             pooledObjects.Add(tmp);
         }
+    }
+
+    protected virtual void OnEnable()
+    {        
+        SharedInstance = this;
+    }
+
+    protected virtual void OnDisable()
+    {
+        
     }
 
     public virtual GameObject GetPooledObject()

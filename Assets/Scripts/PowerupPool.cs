@@ -27,7 +27,18 @@ public class PowerupPool : ObjectPool<Powerup>
             tmp.SetActive(false);
             SharedInstance.pooledObjects.Add(tmp);
         }
+        
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
         StartCoroutine(SpawnPowerup());
+    }
+
+    protected override void OnDisable()
+    {
+        StopCoroutine(SpawnPowerup());
     }
 
     IEnumerator SpawnPowerup()
@@ -52,10 +63,5 @@ public class PowerupPool : ObjectPool<Powerup>
             return pooledObjects[randomPowerup];
         }
         return null;
-    }
-
-    private void OnDestroy()
-    {
-        StopCoroutine(SpawnPowerup());
     }
 }

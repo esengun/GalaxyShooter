@@ -8,29 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _explosion;
     [SerializeField] private float _speed;
 
-    private Health _health;
-    private static Score _score;
+    
     private SpriteRenderer _spriteRenderer;
     private Sprite _defaultSprite;
     private bool _hasShield;
 
-    public static Action PlayerDead;
-
     // Start is called before the first frame update
     void Start()
     {
-        _score = GetComponent<Score>();
-        if (_score == null)
-        {
-            _score = gameObject.AddComponent<Score>();
-        }
-
-        _health = GetComponent<Health>();
-        if( _health == null)
-        {
-            _health = gameObject.AddComponent<Health>();
-        }
-
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _defaultSprite = _spriteRenderer.sprite;
 
@@ -114,17 +99,12 @@ public class Player : MonoBehaviour
 
     private void TakeDamage()
     {
-        _health.DecreaseHealth();
-        if (_health._numberOfLives < 1)
+        GameManager.SharedInstance._health.DecreaseHealth();
+        if (GameManager.SharedInstance._health._numberOfLives < 1)
         {
             Instantiate(_explosion, transform.position, Quaternion.identity);
-            PlayerDead?.Invoke();
+            GameManager.SharedInstance.OnPlayerDead();
             Destroy(gameObject);
         }
-    }
-
-    public static void EnemyKilledAddPoints()
-    {
-        _score.IncreaseScore();
     }
 }

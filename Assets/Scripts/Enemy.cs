@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.GetComponent<Bullet>() != null || other.GetComponent<TripleBullet>() != null)
         {
+            GameManager.SharedInstance.OnEnemyKilled();
             EnemyKilled?.Invoke();
             Instantiate(_explosion, transform.position, Quaternion.identity);
             DisableEnemy();

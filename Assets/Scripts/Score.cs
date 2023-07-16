@@ -11,7 +11,7 @@ public class Score : MonoBehaviour
     private void Start()
     {
         _currentScore = 0;
-        _uiManager.UpdateLiveUI(_currentScore);
+        _uiManager.UpdateScoreUI(_currentScore);
     }
 
     public void IncreaseScore()
@@ -23,6 +23,12 @@ public class Score : MonoBehaviour
     public void DecreaseScore()
     {
         _currentScore -= _scoreAmount;
+        _uiManager.UpdateScoreUI(_currentScore);
+    }
+
+    public void ResetScore()
+    {
+        _currentScore = 0;
         _uiManager.UpdateScoreUI(_currentScore);
     }
 }
